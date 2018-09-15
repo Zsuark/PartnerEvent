@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Partner_Event__c</fullName>
+    <deleteConstraint>Restrict</deleteConstraint>
+    <description>Partner Event the Contact is invited to</description>
+    <externalId>false</externalId>
+    <label>Partner Event</label>
+    <referenceTo>PartnerEvent__c</referenceTo>
+    <relationshipLabel>Invites</relationshipLabel>
+    <relationshipName>Invites</relationshipName>
+    <required>true</required>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>
