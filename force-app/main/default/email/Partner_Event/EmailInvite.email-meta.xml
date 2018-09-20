@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>false</available>
+    <description>Email to Partner Event Invite</description>
+    <encodingKey>UTF-8</encodingKey>
+    <name>EmailInvite</name>
+    <style>none</style>
+    <subject>You are invited to a new event!</subject>
+    <textOnly>Dear {!Invite__c.Contact__c.Name},
+
+You have been invited to {!Invite__c.PartnerEvent__c.Event_Name__c}!
+
+{!PartnerEvent__c.Description__c}
+
+We are looking forward to seeing you there!
+
+The United Consult team</textOnly>
+    <type>custom</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

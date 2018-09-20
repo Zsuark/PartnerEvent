@@ -1,0 +1,9 @@
+<p>Dear {!Invite__c.Contact__c.Name},</p>
+
+<p>You have been invited to {!Invite__c.PartnerEvent__c.Event_Name__c}!</p>
+
+<div>{!PartnerEvent__c.Description__c}</div>
+
+<p>We are looking forward to seeing you there!</p>
+
+<p>The United Consult team</p>
