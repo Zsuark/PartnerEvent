@@ -1,6 +1,6 @@
-<p>Dear {!Invite__c.Contact__c.Name},</p>
+<p>Dear {!Contact__c.Name},</p>
 
-<p>You have been invited to {!Invite__c.PartnerEvent__c.Event_Name__c}!</p>
+<p>You have been invited to {!PartnerEvent__c.Event_Name__c}!</p>
 
 <div>{!PartnerEvent__c.Description__c}</div>
 
