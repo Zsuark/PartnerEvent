@@ -14,7 +14,8 @@ public class EmailHelper {
         EmailTemplate template = [Select id from EmailTemplate where DeveloperName = 'EmailInvite'];
         List<Messaging.SingleEmailMessage> emailList = new List<Messaging.SingleEmailMessage>();
         
-        for (Id partnerEventId : eventContactMap.keySet()) {
+        for (Id partnerEventId : eventContactMap.keySet())
+        {
             List<Id> contactIdList = eventContactMap.get(partnerEventId);
             for (Id c : contactIdList)
             {
@@ -26,6 +27,7 @@ public class EmailHelper {
                 emailList.add(email);
             }
         }
+        
         return Messaging.sendEmail(emailList, false);
         
     }  
