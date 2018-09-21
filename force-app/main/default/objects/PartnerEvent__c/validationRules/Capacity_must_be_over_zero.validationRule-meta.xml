@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Capacity_must_be_over_zero</fullName>
+    <active>true</active>
+    <description>A PartnerEvent must have a capacity greater than zero</description>
+    <errorConditionFormula>Capacity__c &lt;= 0</errorConditionFormula>
+    <errorDisplayField>Capacity__c</errorDisplayField>
+    <errorMessage>A PartnerEvent must have a capacity greater than zero</errorMessage>
+</ValidationRule>
