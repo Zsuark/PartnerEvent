@@ -2,30 +2,41 @@
 global with sharing class InviteRestResource {
 	
 	@HttpPatch
-    global static String updateStatus() {
+    global static void updateStatus() {
 
-	    RestRequest request = RestContext.request;
+	    RestRequest req = RestContext.request;
+        RestResponse res = RestContext.response;
 
-	    Map<String, Object> params = (Map<String, Object>)
-	    	JSON.deserializeUntyped(request.requestbody.tostring());
-
-	    if (! params.containsKey('id')) {
-	    	return 'ERROR: Invite ID not given in request';
+	    if (! req.params.containsKey('id')) {
+            res.statusCode = 400;            
+            res.responseBody = Blob.valueOf(JSON.serialize(
+                new Map<String, String> {'error' => 'Invite ID not given in request'}));
+            return;
 	    }
 
-	    if (! params.containsKey('status')) {
-	    	return 'ERROR: Invite status not given in request';
+	    if (! req.params.containsKey('status')) {
+            res.statusCode = 400;
+            res.responseBody = Blob.valueOf(JSON.serialize(
+                new Map<String, String> {'error' => 'Invite status not given in request'}));
+            return;
 	    }
 
-	    Id inviteId  = (Id) params.get('id');
-	    Id status = (String) params.get('status');
+	    String inviteId  = req.params.get('id');
+	    String status    = req.params.get('status');
 
 	    Invite__c invite = new Invite__c(Id = inviteId, Status__c = status);
 	    try {
 	    	update invite;
 	    } catch (DmlException e) {
-	    	return 'ERROR: DML Exception occured when trying to update invite with ID '
-	    		+ inviteId + ' and Status__c of \'' + status + '\'';
+            res.statusCode = 500;
+
+            res.responseBody =
+                Blob.valueOf(JSON.serialize(new Map<String, String> {
+                    'error' => 'DML Exception occured when trying to update invite with ID '
+                        + inviteId + ' and Status__c of \'' + status + '\'\n',
+                    'exception' => e.getMessage()
+            }));
+            return;
 	    }
 
 	    invite = [
@@ -33,7 +44,9 @@ global with sharing class InviteRestResource {
 	    	FROM Invite__c
 	    	WHERE Id = :inviteId
 	    ];
+        
+        res.statusCode = 200;
+        res.responseBody = Blob.valueOf(JSON.serialize(invite));
 
-	    return invite.Status__c;
     }
 }
