@@ -1,5 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Profile xmlns="http://soap.sforce.com/2006/04/metadata">
+    <applicationVisibilities>
+        <application>PartnerEvent</application>
+        <default>false</default>
+        <visible>true</visible>
+    </applicationVisibilities>
+    <classAccesses>
+        <apexClass>EmailHelper</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>EmailHelperTest</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>InviteRestResource</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>InviteRestResourceTest</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>InviteTriggerTest</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
     <custom>true</custom>
     <fieldPermissions>
         <editable>true</editable>
