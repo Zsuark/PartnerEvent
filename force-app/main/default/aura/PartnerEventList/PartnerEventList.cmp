@@ -7,26 +7,42 @@
         <table class="slds-table slds-table_bordered slds-table_striped slds-table_cell-buffer slds-table_fixed-layout">
           <thead>
             <tr class="slds-text-heading_label">
-                <!--
-					Capacity__c, CreatedBy.Name, Date_Time__c, Description__c, Event_Name__c
-				-->
-              <th scope="col"><div class="slds-truncate" title="EventName">Event Name</div></th>
-              <th scope="col"><div class="slds-truncate" title="DateTime">Date and Time</div></th>
-              <th scope="col"><div class="slds-truncate" title="Capacity">Capacity</div></th>
-              <th scope="col"><div class="slds-truncate" title="Description">Description</div></th>
+              <th scope="col">
+                <div class="slds-truncate" title="EventName">Event Name</div>
+              </th>
+              <th scope="col">
+                <div class="slds-truncate" title="DateTime">Date and Time</div>
+              </th>
+              <th scope="col">
+                <div class="slds-truncate" title="Capacity">Capacity</div>
+              </th>
+              <th scope="col">
+                <div class="slds-truncate" title="Description">Description</div>
+              </th>
             </tr>
           </thead>
           <tbody>
             <!-- Use the Apex model and controller to fetch server side data -->
             <aura:iteration items="{!v.partnerEvents}" var="partnerEvent">
                 <tr>
-                    <th scope="row"><div class="slds-truncate" title="{!partnerEvent.Event_Name__c}">{!partnerEvent.Event_Name__c}</div></th>
-                    <td><div class="slds-truncate" title="{!partnerEvent.Date_Time__c}">{!partnerEvent.Date_Time__c}</div></td>
-                    <td><div class="slds-truncate" title="{!partnerEvent.Capacity__c}">{!partnerEvent.Capacity__c}</div></td>
-                    <td><div class="slds-truncate" title="{!partnerEvent.Description__c}">{!partnerEvent.Description__c}</div></td>
+                    <th scope="row">
+                      <div class="slds-truncate" title="{!partnerEvent.Event_Name__c}">{!partnerEvent.Event_Name__c}</div>
+                    </th>
+                    <td>
+                      <div class="slds-truncate" title="{!partnerEvent.Date_Time__c}"><lightning:formattedDateTime value="{!partnerEvent.Date_Time__c}"/></div>
+                    </td>
+                    <td>
+                      <div class="slds-truncate" title="{!partnerEvent.Capacity__c}">{!partnerEvent.Capacity__c}</div>
+                    </td>
+                    <td>
+                      <div class="slds-truncate" title="{!partnerEvent.Description__c}"><lightning:formattedRichText value="{!partnerEvent.Description__c}"></lightning:formattedRichText></div>
+                    </td>
                 </tr>
             </aura:iteration>
           </tbody>
         </table>
-    
+
+        <lightning:button variant="brand" label="New" />
+
+      
 </aura:component>

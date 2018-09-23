@@ -25,6 +25,14 @@
         <apexClass>InviteTriggerTest</apexClass>
         <enabled>false</enabled>
     </classAccesses>
+    <classAccesses>
+        <apexClass>PartnerEventsController</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>PickListController</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
     <custom>true</custom>
     <fieldPermissions>
         <editable>true</editable>
@@ -42,6 +50,10 @@
     <layoutAssignments>
         <layout>PartnerEvent__c-Partner Event Layout</layout>
     </layoutAssignments>
+    <tabVisibilities>
+        <tab>PartnerEvent__c</tab>
+        <visibility>DefaultOn</visibility>
+    </tabVisibilities>
     <userLicense>Salesforce</userLicense>
     <userPermissions>
         <enabled>true</enabled>

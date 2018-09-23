@@ -1,0 +1,19 @@
+<aura:component>
+    
+    <aura:attribute name="partnerEventRecord" type="PartnerEvent__c" />
+    <force:recordData aura:id="forceRecord"
+                      recordId="{!v.recordId}"
+                      targetFields="{!v.partnerEventRecord}"
+                      fields="Id,DateTime__c,Capacity__c,Description__c"
+                      mode="EDIT" />
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+
+    <lightning:inputField aura:id="eventName" name="eventName" label="Event Name" required="true" />
+    <lightning:input aura:id="dateTime" type="datetime" name="dateTime" label="Date and Time" required="true" />
+    <lightning:input aura:id="capacity" name="capacity" label="Capacity" required="true" />
+    <lightning:formattedRichText aura:id="description"
+                                 name="description" label="Description" required="true" />
+    <lightning:button variant="neutral" label="Cancel" />
+    <lightning:button variant="brand" label="Submit" onclick="{!c.saveRecord}" />
+    
+</aura:component>

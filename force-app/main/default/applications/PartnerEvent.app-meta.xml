@@ -10,6 +10,7 @@
     <isNavPersonalizationDisabled>false</isNavPersonalizationDisabled>
     <label>Partner Event</label>
     <navType>Standard</navType>
+    <tabs>Partner_Events</tabs>
     <uiType>Lightning</uiType>
     <utilityBar>Partner_Event_UtilityBar</utilityBar>
 </CustomApplication>
