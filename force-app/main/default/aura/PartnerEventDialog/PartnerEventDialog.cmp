@@ -5,31 +5,26 @@
     <aura:attribute name="recordError"
                     type="String"
                     />
-
     
     <force:recordData aura:id="forceRecord"
                       targetFields="{!v.partnerEvent}"
-                      fields="Id,Event_Name__c,DateTime__c,Capacity__c,Description__c"
+                      fields="Event_Name__c,DateTime__c,Capacity__c,Description__c"
                       targetError="{! v.recordError }"
+                      mode="EDIT"
+                      recordUpdated="{!c.onRecordUpdated}"
                       />
-
-                      <!--
-                      recordUpdated="{! c.onRecordUpdated }"
-                      -->
-    <!--
-    <aura:attribute name="recordError"
-                    type="String"
-                    access="private"
-                    />
-    -->
 
     <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
     
     
-    <div aura:id="editDialog" role="dialog" tabindex="-1" aria-labelledby="header43" class="slds-modal slds-fade-in-open">
+    <div aura:id="editDialog"
+    role="dialog"
+    tabindex="-1"
+    aria-labelledby="header43"
+    class="slds-modal slds-fade-in-open">
         <div class="slds-modal__container">
             <div class="slds-modal__header">
-                <h2 class="slds-text-heading--medium">9Create a new partner event</h2>
+                <h2 class="slds-text-heading--medium">7Create a new partner event</h2>
             </div>
             <div class="slds-modal__content slds-p-around--medium slds-grid slds-wrap ">
                 
@@ -37,20 +32,21 @@
                                  required="true"
                                  value="{!v.partnerEvent.Event_Name__c}"
                                  />
-                <lightning:input aura:id="dateTime" type="datetime" name="dateTime"
-                                 label="Date and Time" required="true"
+                <lightning:input type="datetime"
+                                 label="Date and Time"
+                                 required="true"
                                  value="{!v.partnerEvent.Date_Time__c}"
                                  />
-                <lightning:input aura:id="capacity" type="number" name="capacity"
-                                 label="Capacity" required="true"
+                <lightning:input type="number"
+                                 label="Capacity"
+                                 required="true"
                                  value="{!v.partnerEvent.Capacity__c}"
                                  />
                 
                 <div>
-                    <!-- div class="margined" -->
-                    <span class="slds-form-element__label">Description</span>
-                    <lightning:inputRichText aura:id="description"
-                                             value="{!v.partnerEvent.Description__c}"
+                    <!-- div class="margined"
+                    <span class="slds-form-element__label">Description</span>  -->
+                    <lightning:inputRichText value="{!v.partnerEvent.Description__c}"
                                              labelVisible="true"
                                              variant="bottom-toolbar"
                                              label="Description"

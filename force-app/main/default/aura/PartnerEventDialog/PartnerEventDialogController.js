@@ -17,23 +17,21 @@
             })
         );
     },
+
+    onRecordUpdated:function (component,event,helper) {
+    },    
     
     saveRecord : function(component, event, helper) {
         
         // Needed fields
         // Event_Name__c, Capacity__c, Date_Time__c, Description__c
-        
-		// var eventName   = component.find('eventName').get("v.value");
-        // var capacity    = parseInt(component.find('capacity').get("v.value"), 10);
-        // var dateTime    = component.find("dateTime").get("v.value");
-        // var description = component.get("v.descriptionRichText");
-
         var partnerEvent = component.get("v.partnerEvent");
 
         console.log("partnerEvent: " + JSON.stringify(partnerEvent));
 
 
         var tempRec = component.find("forceRecord");
+
         /*
         component.set("v.partnerEvent.Event_Name__c",  eventName);
         component.set("v.partnerEvent.Capacity__c",    capacity);
@@ -55,28 +53,44 @@
         */
 
         console.log("tempRec: " + JSON.stringify(tempRec));
-        tempRec.saveRecord($A.getCallback(function(result) {
-            console.log(result.state);
+
+
+
+        component.find("forceRecord").saveRecord($A.getCallback(function(saveResult) {
+            console.log("**************** STATE ***********");
+            console.log(saveResult.state);
             var resultsToast = $A.get("e.force:showToast");
             // TODO: REMOVE ME!!!!!!!!! (console.log that is)
-            console.log("*** RESULT: " + JSON.stringify(result));
-            if (result.state === "SUCCESS"  || result.state === "DRAFT") {
+            console.log("*** RESULT *** - " + JSON.stringify(saveResult));
+
+
+            if (saveResult.state === "SUCCESS" || saveResult.state === "DRAFT") {
+                // handle component related logic in event handler
                 resultsToast.setParams({
                     "title": "Partner Event Created",
                     "message": "The Partner Event was created."
                 });
-                resultsToast.fire();
                 helper.navigateTo(component, result.recordId);
-            } else if (result.state === "ERROR") {
-                console.log('Error: ' + JSON.stringify(result.error));
+            } else if (saveResult.state === "INCOMPLETE") {
+                resultsToast.setParams({
+                    "title": "Offline",
+                    "message": "User is offline, device doesn't support drafts."
+                });
+            } else if (saveResult.state === "ERROR") {
                 resultsToast.setParams({
                     "title": "Error",
-                    "message": "There was an error saving the record: " + JSON.stringify(result.error)
+                    "message": "Unfortunately there was an error saving.\n" +
+                                component.get("v.recordError")
                 });
-                resultsToast.fire();         
+                console.log('Problem saving record, error: ' + JSON.stringify(saveResult.error));
             } else {
-                console.log('Unknown problem, state: ' + result.state + ', error: ' + JSON.stringify(result.error));
-            }           
+                resultsToast.setParams({
+                    "title": "Unknown problem",
+                    "message": "Unfortunately there was a problem saving."
+                });
+                console.log('Unknown problem, state: ' + saveResult.state + ', error: ' + JSON.stringify(saveResult.error));
+            }
+            resultsToast.fire();         
         }));
         
     },
